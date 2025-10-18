@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import text
 
-engine_charon = create_engine("mysql+mysqlconnector://charon_user:charon-password@charon-db-mysql.c96i0s8w8kfk.eu-north-1.rds.amazonaws.com:3306/charon")
+engine_charon = create_engine("mysql+mysqlconnector://root:rootpassword@localhost:3301/pluto")
 Session_charon = sessionmaker(bind=engine_charon)
 session = Session_charon()
 
