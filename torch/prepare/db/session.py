@@ -6,9 +6,9 @@ engine_charon = create_engine("mysql+mysqlconnector://root:rootpassword@localhos
 Session_charon = sessionmaker(bind=engine_charon)
 session = Session_charon()
 
-def get_last_data_by_symbol(symbol: str):
+def get_last_data_by_symbol(symbol: str, limit: int = 128):
     try:
-        result = session.execute(text("SELECT * FROM bybit_tickers where symbol = :symbol order by created_at asc"), {"symbol": symbol})
+        result = session.execute(text("SELECT * FROM bybit_tickers where symbol = :symbol order by created_at asc LIMIT :limit"), {"symbol": symbol, "limit": limit})
         return result
     finally:
         session.close()
