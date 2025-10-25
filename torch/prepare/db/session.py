@@ -6,9 +6,9 @@ engine_charon = create_engine("mysql+mysqlconnector://root:rootpassword@localhos
 Session_charon = sessionmaker(bind=engine_charon)
 session = Session_charon()
 
-def get_last_data_by_symbol(symbol: str, until: str = "2025-12-31 00:00:00"):
+def get_last_data_by_symbol(symbol: str):
     try:
-        result = session.execute(text("SELECT lastPrice, volume24h, bid1Size, ask1Size, bid1Price, ask1Price, created_at FROM bybit_tickers where symbol = :symbol and created_at < :until order by created_at asc"), {"symbol": symbol, "until": until})
+        result = session.execute(text("SELECT * FROM bybit_tickers where symbol = :symbol order by created_at asc"), {"symbol": symbol})
         return result
     finally:
         session.close()
