@@ -8,7 +8,7 @@ session = Session_charon()
 
 def get_last_data_by_symbol(symbol: str, limit: int = 128):
     try:
-        result = session.execute(text("SELECT * FROM bybit_tickers where symbol = :symbol order by created_at asc LIMIT :limit"), {"symbol": symbol, "limit": limit})
+        result = session.execute(text("SELECT * FROM bybit_tickers where symbol = :symbol order by created_at desc LIMIT :limit"), {"symbol": symbol, "limit": limit})
         return result
     finally:
         session.close()
